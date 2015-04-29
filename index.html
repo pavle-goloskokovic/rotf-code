@@ -1,0 +1,228 @@
+<!--
+ * Copyright (c) 2013-2015 Pavle Goloskokovic. All rights reserved.
+ *
+-->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Revenge of the Furry | Prune Games</title>
+    <meta name="description" content="Revenge of the Furry - HTML5 Tower Defense Game">
+    <meta name="keywords" content="game,development,html5,javascript,tower,defense,revenge,furry,space,pavle,goloskokovic,prune,kesten,pire,dusan,popovic,dj,bko,nemanja,djurdjevic,games,indie">
+    <meta name="viewport" content="initial-scale=1.0">
+    <link rel="icon" type="image/png" href="/favicon.png"/>
+
+    <link href='http://fonts.googleapis.com/css?family=Asap:400,700' rel='stylesheet' type='text/css'>
+    <!-- build:css css/style.min.css -->
+    <link rel="stylesheet" type="text/css" href="css/interfaceAtlas.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <!-- endbuild -->
+</head>
+<body>
+<canvas id="game-canvas"></canvas>
+<div id="game-interface" class="sprite interface-bg">
+    <div id="menu-state">
+        <div class="sprite logo-big"></div>
+        <br/>
+        <div id="menu-play-btn" class="sprite button">
+            PLAY
+        </div>
+        <br/>
+        <div id="instructions-btn" class="sprite button">
+            INSTRUCTIONS
+        </div>
+        <br/>
+        <div id="about-btn" class="sprite button">
+            ABOUT
+        </div>
+    </div>
+    <div id="instructions">
+        <div id="instructions-header">
+            <div id="instructions-back" class="sprite back"></div>
+            <h1>INSTRUCTIONS</h1>
+            <div>
+                Click on any of the platforms on the map to build a tower on it.
+                <br/>
+                After clicking on a platform, a dialog box from which you choose the type of the tower pops up.
+                <br/>
+                If you have enough money the tower will be built, otherwise the dialog box will stay open.
+                <br/>
+                You can click on the built tower and sell it for 60% of its original price.
+            </div>
+        </div>
+        <div class="instructions-column left">
+            <h2>
+                Towers
+            </h2>
+            <h3 class="cyan">
+                There are three types of towers that you can build:
+            </h3>
+            <div class="instr-section cyan-border-bottom">
+                <div class="sprite junk tower"></div>
+                <div class="instructions-description">
+                    <strong>Junk Tower</strong> - It shoots out clumps of space junk collected over the years around the space
+                    colonies. It affects only one enemy and it has 15% chance of miss. It shoots at a fairly quick rate but it
+                    has a small shooting range.
+                </div>
+                <div class="clear"></div>
+            </div>
+            <div class="instr-section cyan-border-bottom">
+                <div class="sprite plasma tower"></div>
+                <div class="instructions-description">
+                    <strong>Plasma Tower</strong> - This tower shoots balls of plasma matter and liquid gas that vaporizes in
+                    contact with other matter, causing damage on everything in a certain radius. It has somewhat slower shooting
+                    rate but it affects multiple enemies and has larger shooting range.
+                </div>
+                <div class="clear"></div>
+            </div>
+            <div class="instr-section">
+                <div class="sprite rocket tower"></div>
+                <div class="instructions-description">
+                    <strong>Rocket Tower</strong> - It shoots out space homing missiles when an enemy gets into its shooting
+                    range. Rockets navigate towards the enemy with a 100% chance of hit. If an enemy dies before impact, rocket
+                    detects that and changes its target to the nearest enemy. This tower has the same shooting rate as the junk
+                    tower but it has a much larger shooting range.
+                </div>
+                <div class="clear"></div>
+            </div>
+        </div>
+        <div class="instructions-column right">
+            <h2>
+                Enemies
+            </h2>
+            <h3 class="magenta">
+                Killing enemies earns you money for building more towers.
+                <br>
+                You are faced with four types of enemies:
+            </h3>
+            <div class="instr-section magenta-border-bottom">
+                <div class="sprite rabbit enemy"></div>
+                <div class="instructions-description rabbit-description">
+                    <strong>Rabbits</strong> - Notorious bandits. Fortunately they are small and
+                    slow which makes them just a bunch of cannon fodder.
+                </div>
+                <div class="clear"></div>
+            </div>
+            <div class="instr-section magenta-border-bottom">
+                <div class="sprite cat-dog enemy"></div>
+                <div class="instructions-description cat-dog-description">
+                    <strong>Dogs and Cats</strong> - House pets from hell. They are quick and strong.
+                    You will have a lot of trouble with their kind.
+                </div>
+                <div class="clear"></div>
+            </div>
+            <div class="instr-section">
+                <div class="sprite bear enemy"></div>
+                <div class="instructions-description bear-description">
+                    <strong>Bears</strong> - Radioactive beasts. It takes a lot of gun power
+                    to bring these mountain made animals down.
+                </div>
+                <div class="clear"></div>
+            </div>
+        </div>
+    </div>
+    <div id="about">
+        <div id="about-back" class="sprite back"></div>
+        <h1>ABOUT</h1>
+        <div class="sprite logo-small"></div>
+        <div>
+            The story takes place some 150 years from now.
+            <br/>
+            Furry animals have taken over the Earth and forced mankind to exile into space.
+            <br/>
+            And now it seems that the Earth isn’t big enough for them cuddly foes.
+            <br/>
+            Your mission is to prevent the waves of furry animals from reaching
+            <br/>
+            the last remaining human colonies on the edge of the Earth's hemisphere.
+            <br/>
+            <br/>
+            <strong>
+                Does mankind stand a chance? It all depends on you!
+            </strong>
+        </div>
+        <div id="author">
+            <a href="http://www.prunegames.com">
+                <div class="sprite about-logo"></div>
+            </a>
+        </div>
+        <div class="copy">
+            Copyright &copy; 2015. All rights reserved.
+        </div>
+
+    </div>
+    <div id="end-state">
+        <div id="end-state-lost-wrapper">
+            <div class="sprite end-state-lost"></div>
+            <div>
+                Humanity is DOOMED... no biggie
+            </div>
+        </div>
+        <div id="end-state-won-wrapper">
+            <div class="sprite end-state-won"></div>
+            <div>
+                Humanity is saved... for now!
+            </div>
+        </div>
+        <br/>
+        <div id="end_play_btn" class="sprite button">
+            PLAY AGAIN
+        </div>
+        <br/>
+        <div id="end-menu-btn" class="sprite button">
+            BACK TO MENU
+        </div>
+    </div>
+</div>
+<div id="mute-toggle" class="sprite mute-off"></div>
+<script src="http://code.createjs.com/createjs-2013.12.12.min.js"></script>
+<script type="text/javascript">
+    if(typeof createjs == 'undefined')document.write(decodeURI("%3Cscript%20src=%22js/vendor/createjs-2013.12.12.min.js%22%3E%3C/script%3E"));
+</script>
+<!-- build:js js/rotf.min.js -->
+<script src="js/rotf.js"></script>
+<script src="js/Util.js" type="text/javascript"></script>
+<script src="js/AssetsFactory.js" type="text/javascript"></script>
+<script src="js/Background.js" type="text/javascript"></script>
+<script src="js/towers/Tower.js" type="text/javascript"></script>
+<script src="js/towers/JunkTower.js" type="text/javascript"></script>
+<script src="js/towers/PlasmaTower.js" type="text/javascript"></script>
+<script src="js/towers/RocketTower.js" type="text/javascript"></script>
+<script src="js/towers/Platform.js" type="text/javascript"></script>
+<script src="js/enemies/Enemy.js" type="text/javascript"></script>
+<script src="js/enemies/Bear.js" type="text/javascript"></script>
+<script src="js/enemies/Cat.js" type="text/javascript"></script>
+<script src="js/enemies/Dog.js" type="text/javascript"></script>
+<script src="js/enemies/Rabbit.js" type="text/javascript"></script>
+<script src="js/Wave.js" type="text/javascript"></script>
+<script src="js/WaveManager.js" type="text/javascript"></script>
+<script src="js/bullets/Bullet.js" type="text/javascript"></script>
+<script src="js/bullets/JunkBullet.js" type="text/javascript"></script>
+<script src="js/bullets/PlasmaBullet.js" type="text/javascript"></script>
+<script src="js/bullets/RocketBullet.js" type="text/javascript"></script>
+<script src="js/animations/Explosion.js" type="text/javascript"></script>
+<script src="js/animations/JunkExplosion.js" type="text/javascript"></script>
+<script src="js/animations/PlasmaExplosion.js" type="text/javascript"></script>
+<script src="js/animations/RocketExplosion.js" type="text/javascript"></script>
+<script src="js/animations/DiedExplosion.js" type="text/javascript"></script>
+<script src="js/animations/Animation.js" type="text/javascript"></script>
+<script src="js/animations/Rock1.js" type="text/javascript"></script>
+<script src="js/animations/Rock2.js" type="text/javascript"></script>
+<script src="js/animations/Rock3.js" type="text/javascript"></script>
+<script src="js/animations/Rock4.js" type="text/javascript"></script>
+<script src="js/animations/Rock5.js" type="text/javascript"></script>
+<script src="js/animations/Rock6.js" type="text/javascript"></script>
+<script src="js/animations/Rock7a.js" type="text/javascript"></script>
+<script src="js/animations/Rock7b.js" type="text/javascript"></script>
+<script src="js/animations/Rock8a.js" type="text/javascript"></script>
+<script src="js/animations/Rock8b.js" type="text/javascript"></script>
+<script src="js/animations/Alien.js" type="text/javascript"></script>
+<script src="js/animations/Antenna.js" type="text/javascript"></script>
+<script src="js/StatusBar.js" type="text/javascript"></script>
+<script src="js/Interface.js" type="text/javascript"></script>
+<script src="js/PopUpDialog.js" type="text/javascript"></script>
+<script src="js/Game.js" type="text/javascript"></script>
+<script src="js/window.js" type="text/javascript"></script>
+<!-- endbuild -->
+</body>
+</html>
